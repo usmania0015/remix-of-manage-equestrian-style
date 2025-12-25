@@ -31,7 +31,7 @@ const Header = () => {
             <img 
               src={logo} 
               alt="Manège Equestrian" 
-              className="h-20 lg:h-24 w-auto mix-blend-multiply"
+              className="h-20 lg:h-22 w-auto mix-blend-multiply"
             />
           </a>
 
