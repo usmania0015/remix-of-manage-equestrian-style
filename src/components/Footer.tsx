@@ -1,14 +1,15 @@
 import { Link } from "react-router-dom";
 import { Instagram, Facebook, Youtube, CreditCard, Truck, Shield } from "lucide-react";
+import manegeLogo from "@/assets/manege-logo.png";
 
 const Footer = () => {
   const footerLinks = {
     shop: [
-      { name: "New Arrivals", href: "/#new" },
-      { name: "Rider Collection", href: "/#collections" },
-      { name: "Horse Collection", href: "/#collections" },
-      { name: "Best Sellers", href: "/#new" },
-      { name: "Sale", href: "/#new" },
+      { name: "Signature Collection", href: "/signature" },
+      { name: "Rider Collection", href: "/shop?collection=rider" },
+      { name: "Horse Collection", href: "/shop?collection=horse" },
+      { name: "Best Sellers", href: "/shop" },
+      { name: "All Products", href: "/shop" },
     ],
     info: [
       { name: "About Us", href: "/about" },
@@ -52,7 +53,13 @@ const Footer = () => {
         <div className="grid grid-cols-2 md:grid-cols-5 gap-8 lg:gap-12">
           {/* Brand column */}
           <div className="col-span-2">
-            <h3 className="font-heading text-2xl mb-4">Manège Equestrian</h3>
+            <Link to="/" className="inline-block mb-4">
+              <img 
+                src={manegeLogo} 
+                alt="Manège Equestrian" 
+                className="h-20 w-auto invert brightness-0 contrast-100 opacity-90"
+              />
+            </Link>
             <p className="text-primary-foreground/70 text-sm mb-6 max-w-xs">
               Premium equestrian wear crafted with passion and precision. 
               Trusted by Olympic riders and equestrian enthusiasts worldwide since 1999.

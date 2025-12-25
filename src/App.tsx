@@ -14,6 +14,7 @@ import OrderConfirmation from "./pages/OrderConfirmation";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import FAQ from "./pages/FAQ";
+import SignatureCollection from "./pages/SignatureCollection";
 import NotFound from "./pages/NotFound";
 import CartDrawer from "./components/CartDrawer";
 
@@ -31,6 +32,7 @@ const App = () => (
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/shop" element={<Shop />} />
+              <Route path="/signature" element={<SignatureCollection />} />
               <Route path="/product/:id" element={<Product />} />
               <Route path="/auth" element={<Auth />} />
               <Route path="/checkout" element={<Checkout />} />

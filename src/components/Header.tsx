@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Menu, X, Search, ShoppingBag, User } from "lucide-react";
-import logo from "@/assets/logo.png";
+import manegeLogo from "@/assets/manege-logo.png";
 import { useCart } from "@/contexts/CartContext";
 import { useAuth } from "@/contexts/AuthContext";
 
@@ -11,10 +11,10 @@ const Header = () => {
   const { user, signOut } = useAuth();
 
   const navLinks = [
-    { name: "New Arrivals", href: "/#new" },
+    { name: "Signature Collection", href: "/signature" },
+    { name: "Shop", href: "/shop" },
     { name: "About", href: "/about" },
     { name: "Contact", href: "/contact" },
-    { name: "FAQ", href: "/faq" },
   ];
 
   return (
@@ -31,9 +31,9 @@ const Header = () => {
 
           <Link to="/" className="flex items-center gap-3">
             <img 
-              src={logo} 
+              src={manegeLogo} 
               alt="Manège Equestrian" 
-              className="h-20 lg:h-22 w-auto bg-white rounded"
+              className="h-14 lg:h-16 w-auto"
             />
           </Link>
 
