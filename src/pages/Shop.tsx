@@ -3,6 +3,7 @@ import { Link, useSearchParams } from "react-router-dom";
 import { Heart, SlidersHorizontal, X, ArrowRight } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import SEOHead from "@/components/SEOHead";
 import { 
   products, 
   getProductsByCollection, 
@@ -22,6 +23,53 @@ const Shop = () => {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(categoryParam);
   const [sortBy, setSortBy] = useState<string>("featured");
   const [showFilters, setShowFilters] = useState(false);
+
+  // SEO titles based on collection
+  const getSEOTitle = () => {
+    if (selectedCollection === "rider") {
+      return "Shop Rider Collection | Premium Equestrian Apparel | Manège";
+    }
+    if (selectedCollection === "horse") {
+      return "Shop Horse Collection | Luxury Saddle Pads & Equipment | Manège";
+    }
+    return "Shop All Collections | Premium Equestrian Wear & Horse Gear | Manège";
+  };
+
+  const getSEODescription = () => {
+    if (selectedCollection === "rider") {
+      return "Shop premium equestrian apparel for riders. Discover luxury base layers, competition breeches, show jackets, and riding accessories. Free shipping over $250.";
+    }
+    if (selectedCollection === "horse") {
+      return "Shop luxury horse equipment and accessories. Browse premium saddle pads, fly bonnets, ear bonnets, and horse care products. Italian craftsmanship guaranteed.";
+    }
+    return "Explore the complete Manège collection of luxury equestrian products. Premium riding wear, horse equipment, and accessories crafted with Italian excellence.";
+  };
+
+  const shopSchema = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: getSEOTitle(),
+    description: getSEODescription(),
+    mainEntity: {
+      "@type": "ItemList",
+      numberOfItems: products.length,
+      itemListElement: products.slice(0, 10).map((product, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        item: {
+          "@type": "Product",
+          name: product.name,
+          description: product.description,
+          image: product.image,
+          offers: {
+            "@type": "Offer",
+            price: product.price,
+            priceCurrency: "USD"
+          }
+        }
+      }))
+    }
+  };
 
   const filteredProducts = useMemo(() => {
     let result = [...products];
@@ -88,6 +136,13 @@ const Shop = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEOHead
+        title={getSEOTitle()}
+        description={getSEODescription()}
+        keywords="buy equestrian clothing, shop riding wear, horse riding apparel, saddle pads, riding breeches, equestrian accessories, competition wear"
+        canonicalUrl={`https://manege-equestrian.com/shop${selectedCollection !== 'all' ? `?collection=${selectedCollection}` : ''}`}
+        structuredData={shopSchema}
+      />
       <Header />
       
       {/* Hero Banner */}

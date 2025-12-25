@@ -3,6 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import { ArrowLeft, Minus, Plus } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import SEOHead, { generateProductSchema, generateBreadcrumbSchema } from "@/components/SEOHead";
 import { Button } from "@/components/ui/button";
 import { getProductById, products } from "@/data/products";
 import { useCart } from "@/contexts/CartContext";
@@ -20,13 +21,17 @@ const Product = () => {
   if (!product) {
     return (
       <div className="min-h-screen bg-background">
+        <SEOHead
+          title="Product Not Found | Manège Equestrian"
+          description="The product you're looking for could not be found. Browse our collection of premium equestrian apparel and accessories."
+        />
         <Header />
-        <main className="pt-32 pb-20">
+        <main className="pt-40 pb-20">
           <div className="container mx-auto px-6 lg:px-12 text-center">
             <h1 className="font-heading text-3xl mb-4">Product Not Found</h1>
             <p className="text-muted-foreground mb-8">The product you're looking for doesn't exist.</p>
-            <Link to="/" className="btn-primary inline-block">
-              Return Home
+            <Link to="/shop" className="btn-primary inline-block">
+              Continue Shopping
             </Link>
           </div>
         </main>
@@ -34,6 +39,24 @@ const Product = () => {
       </div>
     );
   }
+
+  const productSchema = generateProductSchema({
+    name: product.name,
+    description: product.description,
+    price: product.price,
+    image: `https://manege-equestrian.com${product.image}`,
+    sku: product.id,
+    inStock: product.inStock
+  });
+
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: "Home", url: "https://manege-equestrian.com" },
+    { name: "Shop", url: "https://manege-equestrian.com/shop" },
+    { name: product.category, url: `https://manege-equestrian.com/shop?category=${encodeURIComponent(product.category)}` },
+    { name: product.name, url: `https://manege-equestrian.com/product/${product.id}` }
+  ]);
+
+  const combinedSchema = [productSchema, breadcrumbSchema];
 
   const handleAddToCart = () => {
     if (!selectedSize) {
@@ -54,6 +77,14 @@ const Product = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEOHead
+        title={`${product.name} | ${product.category} | Manège Equestrian`}
+        description={`${product.description} Shop this ${product.category.toLowerCase()} from Manège Equestrian. $${product.price}. Free shipping over $250.`}
+        keywords={`${product.name}, ${product.category}, equestrian ${product.category.toLowerCase()}, luxury riding wear, Manège`}
+        canonicalUrl={`https://manege-equestrian.com/product/${product.id}`}
+        ogType="product"
+        structuredData={combinedSchema}
+      />
       <Header />
       <main className="pt-28 pb-20">
         <div className="container mx-auto px-6 lg:px-12">
