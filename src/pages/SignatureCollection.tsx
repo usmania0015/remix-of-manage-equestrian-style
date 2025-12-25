@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { ArrowRight, Star, Sparkles } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import SEOHead from "@/components/SEOHead";
 import { products } from "@/data/products";
 import manegeLogo from "@/assets/manege-logo.png";
 
@@ -10,6 +11,37 @@ const SignatureCollection = () => {
   const signatureProducts = products.filter(p => 
     p.id.includes('manege-base-layer')
   );
+
+  const signatureSchema = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: "Manège Signature Collection",
+    description: "Exclusive signature base layers featuring Italian craftsmanship and the iconic embossed Manège collar branding.",
+    mainEntity: {
+      "@type": "ItemList",
+      numberOfItems: signatureProducts.length,
+      itemListElement: signatureProducts.map((product, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        item: {
+          "@type": "Product",
+          name: product.name,
+          description: product.description,
+          image: product.image,
+          brand: {
+            "@type": "Brand",
+            name: "Manège Equestrian"
+          },
+          offers: {
+            "@type": "Offer",
+            price: product.price,
+            priceCurrency: "USD",
+            availability: "https://schema.org/InStock"
+          }
+        }
+      }))
+    }
+  };
 
   const lookbookImages = [
     {
@@ -52,6 +84,13 @@ const SignatureCollection = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEOHead
+        title="Signature Collection | Luxury Manège Base Layers | Italian Craftsmanship"
+        description="Discover the exclusive Manège Signature Collection. Premium Italian-crafted base layers featuring our iconic embossed collar branding. Available in 6 sophisticated colors."
+        keywords="Manège signature collection, luxury base layers, Italian equestrian fashion, embossed collar, premium riding tops, signature riding wear"
+        canonicalUrl="https://manege-equestrian.com/signature"
+        structuredData={signatureSchema}
+      />
       <Header />
       
       {/* Hero Section */}

@@ -1,5 +1,6 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import SEOHead, { generateFAQSchema } from "@/components/SEOHead";
 import {
   Accordion,
   AccordionContent,
@@ -30,7 +31,7 @@ const FAQ = () => {
         {
           question: "Is free shipping available?",
           answer:
-            "Yes! We offer free standard shipping on all US orders over $150. International orders may qualify for free shipping on orders over $300.",
+            "Yes! We offer free standard shipping on all US orders over $250. International orders may qualify for free shipping on orders over $300.",
         },
       ],
     },
@@ -106,25 +107,38 @@ const FAQ = () => {
     },
   ];
 
+  // Flatten FAQs for schema
+  const allFaqs = faqs.flatMap(category => 
+    category.questions.map(q => ({ question: q.question, answer: q.answer }))
+  );
+  const faqSchema = generateFAQSchema(allFaqs);
+
   return (
     <div className="min-h-screen bg-background">
+      <SEOHead
+        title="FAQ | Manège Equestrian Help Center | Shipping, Returns & Sizing Guide"
+        description="Find answers to frequently asked questions about Manège Equestrian. Learn about shipping times, return policy, sizing guides, payment methods, and product care instructions."
+        keywords="Manège FAQ, equestrian shipping, riding wear returns, size guide, equestrian clothing care, payment methods, order tracking"
+        canonicalUrl="https://manege-equestrian.com/faq"
+        structuredData={faqSchema}
+      />
       <Header />
-      <main className="pt-32 pb-20">
+      <main className="pt-40 pb-20">
         <div className="container mx-auto px-6 lg:px-12">
           <div className="max-w-3xl mx-auto">
-            <div className="text-center mb-16">
+            <header className="text-center mb-16">
               <h1 className="font-heading text-4xl lg:text-5xl mb-4">
                 Frequently Asked Questions
               </h1>
               <p className="text-muted-foreground text-lg">
                 Find answers to common questions about orders, shipping, returns, and more.
               </p>
-            </div>
+            </header>
 
             <div className="space-y-12">
               {faqs.map((category) => (
-                <div key={category.category}>
-                  <h2 className="font-heading text-xl mb-4">{category.category}</h2>
+                <section key={category.category} aria-labelledby={`category-${category.category.replace(/\s+/g, '-')}`}>
+                  <h2 id={`category-${category.category.replace(/\s+/g, '-')}`} className="font-heading text-xl mb-4">{category.category}</h2>
                   <Accordion type="single" collapsible className="space-y-2">
                     {category.questions.map((faq, index) => (
                       <AccordionItem
@@ -141,19 +155,19 @@ const FAQ = () => {
                       </AccordionItem>
                     ))}
                   </Accordion>
-                </div>
+                </section>
               ))}
             </div>
 
-            <div className="mt-16 text-center p-8 bg-secondary/30 rounded-lg">
-              <h3 className="font-heading text-xl mb-2">Still have questions?</h3>
+            <aside className="mt-16 text-center p-8 bg-secondary/30 rounded-lg">
+              <h2 className="font-heading text-xl mb-2">Still have questions?</h2>
               <p className="text-muted-foreground mb-4">
                 Can't find what you're looking for? Our customer service team is here to help.
               </p>
               <a href="/contact" className="btn-primary inline-block">
                 Contact Us
               </a>
-            </div>
+            </aside>
           </div>
         </div>
       </main>
