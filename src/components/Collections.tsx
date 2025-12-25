@@ -10,7 +10,7 @@ const Collections = () => {
       subtitle: "Competition & Everyday Elegance",
       description: "From show-stopping competition jackets to everyday riding essentials. Each piece engineered for peak performance without compromising on style. Experience the difference that premium Italian fabrics and artisan craftsmanship make.",
       image: collectionRider,
-      link: "/#new",
+      link: "/shop?collection=rider",
       cta: "Explore Rider Collection",
     },
     {
@@ -18,7 +18,7 @@ const Collections = () => {
       subtitle: "Luxury Equine Accessories",
       description: "Your horse deserves the same level of luxury you do. Our equine collection features hand-stitched saddle pads, premium leather bridles, and accessories that combine comfort with unmistakable elegance.",
       image: collectionHorse,
-      link: "/#new",
+      link: "/shop?collection=horse",
       cta: "Explore Horse Collection",
     },
   ];
