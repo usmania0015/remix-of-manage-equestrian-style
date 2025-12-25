@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
 import { ArrowRight, Heart } from "lucide-react";
-import { products } from "@/data/products";
+import { getFeaturedProducts } from "@/data/products";
 
 const FeaturedProducts = () => {
+  const featuredProducts = getFeaturedProducts();
+  
   return (
     <section id="new" className="py-24 lg:py-32 bg-secondary/30">
       <div className="container mx-auto px-6 lg:px-12">
@@ -17,7 +19,7 @@ const FeaturedProducts = () => {
             </p>
           </div>
           <Link 
-            to="/#new" 
+            to="/shop" 
             className="text-sm tracking-widest uppercase hover:opacity-70 transition-opacity border-b border-foreground pb-1 self-start inline-flex items-center gap-2"
           >
             View All
@@ -31,7 +33,7 @@ const FeaturedProducts = () => {
         </div>
 
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
-          {products.map((product) => (
+          {featuredProducts.map((product) => (
             <Link key={product.id} to={`/product/${product.id}`} className="product-card group">
               <div className="product-card-image aspect-[3/4] mb-4 relative">
                 <img
@@ -66,7 +68,7 @@ const FeaturedProducts = () => {
 
         {/* Bottom CTAs */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center mt-12">
-          <Link to="/#new" className="btn-primary inline-flex items-center justify-center gap-2">
+          <Link to="/shop" className="btn-primary inline-flex items-center justify-center gap-2">
             Shop All Products
             <ArrowRight className="w-4 h-4" />
           </Link>
