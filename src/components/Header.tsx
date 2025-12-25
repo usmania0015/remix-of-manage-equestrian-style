@@ -1,23 +1,26 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Menu, X, Search, ShoppingBag, User } from "lucide-react";
 import logo from "@/assets/logo.png";
+import { useCart } from "@/contexts/CartContext";
+import { useAuth } from "@/contexts/AuthContext";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { totalItems, setIsCartOpen } = useCart();
+  const { user, signOut } = useAuth();
 
   const navLinks = [
-    { name: "New Arrivals", href: "#new" },
-    { name: "Rider", href: "#rider" },
-    { name: "Horse", href: "#horse" },
-    { name: "Collections", href: "#collections" },
-    { name: "Sale", href: "#sale" },
+    { name: "New Arrivals", href: "/#new" },
+    { name: "About", href: "/about" },
+    { name: "Contact", href: "/contact" },
+    { name: "FAQ", href: "/faq" },
   ];
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
       <div className="container mx-auto px-6 lg:px-12">
         <div className="flex items-center justify-between h-20">
-          {/* Mobile Menu Button */}
           <button
             className="lg:hidden p-2 -ml-2"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -26,52 +29,69 @@ const Header = () => {
             {isMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
 
-          {/* Logo */}
-          <a href="/" className="flex items-center gap-3">
+          <Link to="/" className="flex items-center gap-3">
             <img 
               src={logo} 
               alt="Manège Equestrian" 
               className="h-20 lg:h-22 w-auto bg-white rounded"
             />
-          </a>
+          </Link>
 
-          {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center gap-8">
             {navLinks.map((link) => (
-              <a key={link.name} href={link.href} className="nav-link">
+              <Link key={link.name} to={link.href} className="nav-link">
                 {link.name}
-              </a>
+              </Link>
             ))}
           </nav>
 
-          {/* Icons */}
           <div className="flex items-center gap-4">
             <button className="p-2 hover:opacity-70 transition-opacity" aria-label="Search">
               <Search className="w-5 h-5" />
             </button>
-            <button className="p-2 hover:opacity-70 transition-opacity hidden sm:block" aria-label="Account">
+            <Link 
+              to={user ? "/" : "/auth"} 
+              onClick={user ? () => signOut() : undefined}
+              className="p-2 hover:opacity-70 transition-opacity hidden sm:block" 
+              aria-label={user ? "Sign out" : "Account"}
+            >
               <User className="w-5 h-5" />
-            </button>
-            <button className="p-2 hover:opacity-70 transition-opacity" aria-label="Cart">
+            </Link>
+            <button 
+              className="p-2 hover:opacity-70 transition-opacity relative" 
+              aria-label="Cart"
+              onClick={() => setIsCartOpen(true)}
+            >
               <ShoppingBag className="w-5 h-5" />
+              {totalItems > 0 && (
+                <span className="absolute -top-1 -right-1 w-5 h-5 bg-primary text-primary-foreground text-xs flex items-center justify-center rounded-full">
+                  {totalItems}
+                </span>
+              )}
             </button>
           </div>
         </div>
 
-        {/* Mobile Navigation */}
         {isMenuOpen && (
           <nav className="lg:hidden py-6 border-t border-border animate-fade-in">
             <div className="flex flex-col gap-4">
               {navLinks.map((link) => (
-                <a
+                <Link
                   key={link.name}
-                  href={link.href}
+                  to={link.href}
                   className="text-sm tracking-wide uppercase py-2 hover:opacity-70 transition-opacity"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {link.name}
-                </a>
+                </Link>
               ))}
+              <Link
+                to={user ? "/" : "/auth"}
+                onClick={() => { setIsMenuOpen(false); if (user) signOut(); }}
+                className="text-sm tracking-wide uppercase py-2 hover:opacity-70 transition-opacity"
+              >
+                {user ? "Sign Out" : "Sign In"}
+              </Link>
             </div>
           </nav>
         )}
