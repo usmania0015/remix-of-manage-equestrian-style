@@ -132,7 +132,7 @@
   }
 
   .product-card {
-    @apply group cursor-pointer;
+    @apply cursor-pointer;
   }
 
   .product-card-image {
