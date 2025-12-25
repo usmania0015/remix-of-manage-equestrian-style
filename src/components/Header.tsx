@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Menu, X, Search, ShoppingBag, User } from "lucide-react";
+import logo from "@/assets/logo.png";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -26,8 +27,12 @@ const Header = () => {
           </button>
 
           {/* Logo */}
-          <a href="/" className="font-heading text-xl lg:text-2xl tracking-wide">
-            Manage Equestrian
+          <a href="/" className="flex items-center gap-3">
+            <img 
+              src={logo} 
+              alt="Manège Equestrian" 
+              className="h-12 lg:h-14 w-auto"
+            />
           </a>
 
           {/* Desktop Navigation */}
