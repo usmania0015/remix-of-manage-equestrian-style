@@ -1,36 +1,7 @@
-import productJacket from "@/assets/product-jacket.jpg";
-import productBreeches from "@/assets/product-breeches.jpg";
-import productBaselayer from "@/assets/product-baselayer.jpg";
-import productSaddlepad from "@/assets/product-saddlepad.jpg";
+import { Link } from "react-router-dom";
+import { products } from "@/data/products";
 
 const FeaturedProducts = () => {
-  const products = [
-    {
-      name: "Classic Riding Jacket",
-      price: "$289",
-      image: productJacket,
-      category: "Jackets",
-    },
-    {
-      name: "High Waist Breeches",
-      price: "$199",
-      image: productBreeches,
-      category: "Breeches",
-    },
-    {
-      name: "Performance Base Layer",
-      price: "$89",
-      image: productBaselayer,
-      category: "Tops",
-    },
-    {
-      name: "Dressage Saddle Pad",
-      price: "$149",
-      image: productSaddlepad,
-      category: "Horse",
-    },
-  ];
-
   return (
     <section id="new" className="py-24 lg:py-32 bg-secondary/30">
       <div className="container mx-auto px-6 lg:px-12">
@@ -46,7 +17,7 @@ const FeaturedProducts = () => {
 
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
           {products.map((product) => (
-            <div key={product.name} className="product-card">
+            <Link key={product.id} to={`/product/${product.id}`} className="product-card group">
               <div className="product-card-image aspect-[3/4] mb-4">
                 <img
                   src={product.image}
@@ -58,8 +29,8 @@ const FeaturedProducts = () => {
                 {product.category}
               </p>
               <h3 className="font-heading text-lg mb-1">{product.name}</h3>
-              <p className="text-foreground font-medium">{product.price}</p>
-            </div>
+              <p className="text-foreground font-medium">${product.price}</p>
+            </Link>
           ))}
         </div>
       </div>
