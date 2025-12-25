@@ -2,6 +2,12 @@ import productJacket from "@/assets/product-jacket.jpg";
 import productBreeches from "@/assets/product-breeches.jpg";
 import productBaselayer from "@/assets/product-baselayer.jpg";
 import productSaddlepad from "@/assets/product-saddlepad.jpg";
+import baselayerCream from "@/assets/baselayer-cream.png";
+import baselayerNavy from "@/assets/baselayer-navy.png";
+import baselayerBurgundy from "@/assets/baselayer-burgundy.jpg";
+import baselayerBlack from "@/assets/baselayer-black.png";
+import baselayerBlush from "@/assets/baselayer-blush.jpg";
+import baselayerCamel from "@/assets/baselayer-camel.png";
 
 export interface Product {
   id: string;
@@ -108,6 +114,82 @@ export const products: Product[] = [
     colors: ["White", "Black", "Grey"],
     inStock: true,
     isNew: true,
+  },
+  {
+    id: "manege-base-layer-cream",
+    name: "Manège Signature Base Layer - Cream",
+    price: 125,
+    image: baselayerCream,
+    category: "Tops",
+    collection: "rider",
+    description: "The iconic Manège signature base layer featuring our embossed logo collar. Crafted from premium Italian jersey with four-way stretch, moisture-wicking properties, and a silky smooth finish. The cream colorway offers timeless elegance for training and competition.",
+    sizes: ["XS", "S", "M", "L", "XL"],
+    colors: ["Cream"],
+    inStock: true,
+    isNew: true,
+  },
+  {
+    id: "manege-base-layer-navy",
+    name: "Manège Signature Base Layer - Navy",
+    price: 125,
+    image: baselayerNavy,
+    category: "Tops",
+    collection: "rider",
+    description: "The iconic Manège signature base layer featuring our embossed logo collar and half-zip design. Crafted from premium Italian jersey with four-way stretch and moisture-wicking properties. The deep navy colorway exudes sophistication and versatility.",
+    sizes: ["XS", "S", "M", "L", "XL"],
+    colors: ["Navy"],
+    inStock: true,
+    isBestSeller: true,
+  },
+  {
+    id: "manege-base-layer-burgundy",
+    name: "Manège Signature Base Layer - Burgundy",
+    price: 125,
+    image: baselayerBurgundy,
+    category: "Tops",
+    collection: "rider",
+    description: "The iconic Manège signature base layer featuring our embossed logo collar. Crafted from premium Italian jersey with four-way stretch and moisture-wicking properties. The rich burgundy colorway makes a bold yet refined statement.",
+    sizes: ["XS", "S", "M", "L", "XL"],
+    colors: ["Burgundy"],
+    inStock: true,
+  },
+  {
+    id: "manege-base-layer-black",
+    name: "Manège Signature Base Layer - Black",
+    price: 125,
+    image: baselayerBlack,
+    category: "Tops",
+    collection: "rider",
+    description: "The iconic Manège signature base layer featuring our embossed logo collar. Crafted from premium Italian jersey with four-way stretch and moisture-wicking properties. Classic black for the discerning equestrian.",
+    sizes: ["XS", "S", "M", "L", "XL"],
+    colors: ["Black"],
+    inStock: true,
+    isBestSeller: true,
+  },
+  {
+    id: "manege-base-layer-blush",
+    name: "Manège Signature Base Layer - Blush",
+    price: 125,
+    image: baselayerBlush,
+    category: "Tops",
+    collection: "rider",
+    description: "The iconic Manège signature base layer featuring our embossed logo collar. Crafted from premium Italian jersey with four-way stretch and moisture-wicking properties. The delicate blush pink adds a touch of feminine elegance.",
+    sizes: ["XS", "S", "M", "L", "XL"],
+    colors: ["Blush"],
+    inStock: true,
+    isNew: true,
+  },
+  {
+    id: "manege-base-layer-camel",
+    name: "Manège Signature Base Layer - Camel",
+    price: 125,
+    image: baselayerCamel,
+    category: "Tops",
+    collection: "rider",
+    description: "The iconic Manège signature base layer featuring our embossed logo collar. Crafted from premium Italian jersey with four-way stretch and moisture-wicking properties. The warm camel tone brings earthy sophistication to your riding wardrobe.",
+    sizes: ["XS", "S", "M", "L", "XL"],
+    colors: ["Camel"],
+    inStock: true,
   },
   {
     id: "technical-polo-shirt",
