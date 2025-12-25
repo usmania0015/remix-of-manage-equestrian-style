@@ -7,25 +7,25 @@ const FeaturedProducts = () => {
   const products = [
     {
       name: "Classic Riding Jacket",
-      price: "€289",
+      price: "$289",
       image: productJacket,
       category: "Jackets",
     },
     {
       name: "High Waist Breeches",
-      price: "€199",
+      price: "$199",
       image: productBreeches,
       category: "Breeches",
     },
     {
       name: "Performance Base Layer",
-      price: "€89",
+      price: "$89",
       image: productBaselayer,
       category: "Tops",
     },
     {
       name: "Dressage Saddle Pad",
-      price: "€149",
+      price: "$149",
       image: productSaddlepad,
       category: "Horse",
     },
