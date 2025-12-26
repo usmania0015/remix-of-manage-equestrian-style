@@ -66,14 +66,11 @@ const FeaturedProducts = () => {
           ))}
         </div>
 
-        {/* Bottom CTAs */}
-        <div className="flex flex-col sm:flex-row gap-4 justify-center mt-12">
+        {/* Bottom CTA */}
+        <div className="flex justify-center mt-12">
           <Link to="/shop" className="btn-primary inline-flex items-center justify-center gap-2">
             Shop All Products
             <ArrowRight className="w-4 h-4" />
-          </Link>
-          <Link to="/contact" className="btn-outline inline-flex items-center justify-center gap-2">
-            Get Personal Styling
           </Link>
         </div>
       </div>

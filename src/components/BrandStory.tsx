@@ -36,9 +36,6 @@ const BrandStory = () => {
                 Discover Our Story
                 <ArrowRight className="w-4 h-4" />
               </Link>
-              <Link to="/contact" className="btn-outline">
-                Visit Our Atelier
-              </Link>
             </div>
           </div>
           

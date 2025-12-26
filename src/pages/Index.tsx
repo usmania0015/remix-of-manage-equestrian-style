@@ -3,7 +3,8 @@ import Hero from "@/components/Hero";
 import Collections from "@/components/Collections";
 import FeaturedProducts from "@/components/FeaturedProducts";
 import BrandStory from "@/components/BrandStory";
-import Testimonials from "@/components/Testimonials";
+import SaleCarousel from "@/components/SaleCarousel";
+import ReviewsCarousel from "@/components/ReviewsCarousel";
 import Newsletter from "@/components/Newsletter";
 import FinalCTA from "@/components/FinalCTA";
 import Footer from "@/components/Footer";
@@ -39,9 +40,10 @@ const Index = () => {
       <main>
         <Hero />
         <Collections />
-        <FeaturedProducts />
         <BrandStory />
-        <Testimonials />
+        <SaleCarousel />
+        <FeaturedProducts />
+        <ReviewsCarousel />
         <Newsletter />
         <FinalCTA />
       </main>

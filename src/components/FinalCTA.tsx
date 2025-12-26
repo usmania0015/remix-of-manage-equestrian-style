@@ -23,20 +23,14 @@ const FinalCTA = () => {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link 
-              to="/#new" 
+              to="/shop" 
               className="px-10 py-4 bg-primary-foreground text-charcoal text-sm tracking-widest uppercase font-medium hover:bg-primary-foreground/90 transition-colors"
             >
               Shop New Arrivals
             </Link>
-            <Link 
-              to="/contact" 
-              className="px-10 py-4 border border-primary-foreground/50 text-primary-foreground text-sm tracking-widest uppercase font-medium hover:bg-primary-foreground/10 transition-colors"
-            >
-              Book a Consultation
-            </Link>
           </div>
           <p className="text-sm text-primary-foreground/50 mt-8">
-            Free shipping on orders over $250 • Easy 30-day returns • Personal styling available
+            Free shipping on orders over $250 • Easy 30-day returns
           </p>
         </div>
       </div>

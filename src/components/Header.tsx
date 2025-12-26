@@ -5,7 +5,7 @@ import manegeLogo from "@/assets/manege-logo.png";
 import { useCart } from "@/contexts/CartContext";
 import { useAuth } from "@/contexts/AuthContext";
 import AnnouncementBar from "./AnnouncementBar";
-import { Input } from "./ui/input";
+import CurrencyLanguageSelector from "./CurrencyLanguageSelector";
 
 const riderMenu = {
   Women: [
@@ -186,23 +186,26 @@ const Header = () => {
             </nav>
 
             {/* Right Side Actions */}
-            <div className="flex items-center gap-2 lg:gap-3">
+            <div className="flex items-center gap-1 lg:gap-2">
+              {/* Currency/Language Selector */}
+              <CurrencyLanguageSelector className="hidden lg:flex mr-2" />
+
               {/* Desktop Search Bar */}
               <div className="hidden md:flex items-center">
                 {isSearchOpen ? (
                   <form onSubmit={handleSearch} className="flex items-center">
-                    <Input
+                    <input
                       type="search"
-                      placeholder="Search products..."
+                      placeholder="Search..."
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
-                      className="w-40 lg:w-52 h-9 text-sm bg-muted border-0 focus-visible:ring-1"
+                      className="w-40 lg:w-48 h-9 px-4 text-sm bg-background border-0 rounded-full focus:outline-none focus:ring-1 focus:ring-border/50 transition-all"
                       autoFocus
                     />
                     <button
                       type="button"
                       onClick={() => setIsSearchOpen(false)}
-                      className="p-2 hover:bg-muted rounded-sm transition-colors ml-1"
+                      className="p-2 hover:opacity-70 transition-opacity ml-1"
                       aria-label="Close search"
                     >
                       <X className="w-4 h-4" />
@@ -210,12 +213,11 @@ const Header = () => {
                   </form>
                 ) : (
                   <button 
-                    className="p-2 hover:bg-muted rounded-sm transition-colors flex items-center gap-2 text-sm text-muted-foreground"
+                    className="p-2 hover:opacity-70 transition-opacity flex items-center gap-2 text-sm text-muted-foreground"
                     onClick={() => setIsSearchOpen(true)}
                     aria-label="Open search"
                   >
                     <Search className="w-4 h-4" />
-                    <span className="hidden lg:inline">Search</span>
                   </button>
                 )}
               </div>
@@ -260,12 +262,12 @@ const Header = () => {
           {isSearchOpen && (
             <div className="md:hidden pb-4 animate-fade-in">
               <form onSubmit={handleSearch}>
-                <Input
+                <input
                   type="search"
                   placeholder="Search for products..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full h-10 bg-muted border-0"
+                  className="w-full h-10 px-4 bg-background border-0 rounded-full text-sm focus:outline-none focus:ring-1 focus:ring-border/50"
                   autoFocus
                 />
               </form>
