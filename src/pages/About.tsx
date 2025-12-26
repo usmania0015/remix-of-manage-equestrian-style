@@ -53,21 +53,32 @@ const About = () => {
         </section>
 
         <div className="container mx-auto px-6 lg:px-12">
-          {/* Mission */}
-          <section className="max-w-3xl mx-auto text-center mb-24">
-            <h2 className="font-heading text-3xl lg:text-4xl mb-6">
-              Crafted for the Modern Equestrian
-            </h2>
-            <p className="text-muted-foreground text-lg leading-relaxed mb-6">
-              Founded in 1999, Manège Equestrian was born from a passion for both horses and 
-              impeccable design. We believe that equestrian wear should seamlessly blend 
-              performance with elegance, allowing riders to feel confident both in and out of the saddle.
-            </p>
-            <p className="text-muted-foreground text-lg leading-relaxed">
-              Every piece in our collection is thoughtfully designed and crafted from the 
-              finest materials, ensuring durability, comfort, and timeless style. Our Italian 
-              manufacturing partners bring centuries of craftsmanship expertise to every stitch.
-            </p>
+          {/* Brand Philosophy - Exact Copy */}
+          <section className="max-w-3xl mx-auto mb-24">
+            <div className="space-y-6 text-lg leading-relaxed">
+              <p className="text-foreground">
+                At Manège Equestrian, we honor the art of refinement, both in the saddle and beyond it.
+              </p>
+              <p className="text-muted-foreground">
+                Our world is shaped by intention, quiet confidence, and an appreciation for the timeless 
+                rituals that elevate everyday living.
+              </p>
+              <p className="text-muted-foreground">
+                We believe that a life well lived is one rooted in discipline, grace, and personal 
+                expression, whether you're training at dawn, walking the grounds of a show, or moving 
+                through your day with purpose.
+              </p>
+              <p className="text-muted-foreground">
+                Each piece in our collection is thoughtfully crafted to accompany you through these 
+                moments. Tailored, functional, and elegantly understated, our designs move with you, 
+                allowing you to feel poised, grounded, and effortlessly polished in every stride.
+              </p>
+              <p className="text-foreground font-heading text-xl mt-8">
+                Because at Manège, we don't simply dress the rider.
+                <br />
+                We dress the woman she is becoming.
+              </p>
+            </div>
           </section>
 
           {/* Values */}
