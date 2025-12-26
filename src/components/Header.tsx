@@ -1,25 +1,90 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Menu, X, Search, ShoppingBag, User, ChevronDown } from "lucide-react";
+import { Menu, X, Search, ShoppingBag, User, ChevronDown, ChevronRight } from "lucide-react";
 import manegeLogo from "@/assets/manege-logo.png";
 import { useCart } from "@/contexts/CartContext";
 import { useAuth } from "@/contexts/AuthContext";
 import AnnouncementBar from "./AnnouncementBar";
 import { Input } from "./ui/input";
 
+const riderMenu = {
+  Women: [
+    "Riding Breeches & Tights",
+    "Tops",
+    "Riding Jackets",
+    "Riding Vests",
+    "Riding Sweaters",
+  ],
+  Competition: ["Show Jackets", "Show Shirts"],
+  Men: ["Riding Breeches", "Shirts and Sweaters", "Vests", "Jackets"],
+  "Young Rider": ["Riding Tights", "Tops & Jackets", "Accessories"],
+  Accessories: [
+    "Riding Gloves",
+    "Bags",
+    "Riding Socks",
+    "Caps",
+    "Belts",
+    "Riding Stocks",
+    "Towels",
+    "Jewelry",
+    "Headbands & Beanies",
+  ],
+  Gifting: ["Gift Guide", "Gift Cards"],
+  Dog: ["Dog Collars", "Dog Rugs", "Riding Breeches & Tights"],
+};
+
+const horseMenu = {
+  "Saddle Pads by Color": [
+    "Beige",
+    "Black",
+    "Blue",
+    "Brown",
+    "Green",
+    "Gray",
+    "Orange",
+    "Pink",
+    "Purple",
+    "Red",
+    "Turquoise",
+    "White",
+    "Yellow",
+  ],
+  "Saddle Pads": [
+    "Dressage Saddle Pads",
+    "Jumping Saddle Pads",
+    "Pony & Cob Saddle Pads",
+    "Glimmer Saddle Pads",
+    "Saddle Pads with Grip",
+    "Mesh Saddle Pads",
+    "10-year Anniversary Collection",
+  ],
+  "Horse Boots": [
+    "Mesh Boots",
+    "Brushing Boots",
+    "Polo Wraps",
+    "Bell Boots",
+    "Tendon & Fetlock Boots",
+  ],
+  "Horse Equipment": ["Ear Bonnets", "Halters", "Horse Blankets", "Accessories"],
+  Competition: ["Show Jumping", "Dressage"],
+};
+
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const [expandedMobileSection, setExpandedMobileSection] = useState<string | null>(null);
+  const [expandedMobileCategory, setExpandedMobileCategory] = useState<string | null>(null);
   const { totalItems, setIsCartOpen } = useCart();
   const { user, signOut } = useAuth();
 
   const mainNavLinks = [
     { name: "New Arrivals", href: "/shop?filter=new" },
-    { name: "Rider", href: "/shop?collection=rider" },
-    { name: "Horse", href: "/shop?collection=horse" },
+    { name: "Rider", href: "/shop?collection=rider", hasDropdown: true, menu: riderMenu },
+    { name: "Horse", href: "/shop?collection=horse", hasDropdown: true, menu: horseMenu },
     { name: "Best Sellers", href: "/shop?filter=bestseller" },
-    { name: "Signature Collection", href: "/signature" },
+    { name: "The Ilyana Collection", href: "/signature" },
   ];
 
   const secondaryNavLinks = [
@@ -33,6 +98,12 @@ const Header = () => {
     if (searchQuery.trim()) {
       window.location.href = `/shop?search=${encodeURIComponent(searchQuery)}`;
     }
+  };
+
+  const generateCategoryLink = (category: string, item: string) => {
+    const params = new URLSearchParams();
+    params.set("category", item.toLowerCase().replace(/\s+/g, "-"));
+    return `/shop?${params.toString()}`;
   };
 
   return (
@@ -62,15 +133,55 @@ const Header = () => {
             </Link>
 
             {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center gap-6 xl:gap-8" aria-label="Main navigation">
+            <nav className="hidden lg:flex items-center gap-4 xl:gap-6" aria-label="Main navigation">
               {mainNavLinks.map((link) => (
-                <Link 
-                  key={link.name} 
-                  to={link.href} 
-                  className="nav-link text-xs xl:text-sm"
+                <div
+                  key={link.name}
+                  className="relative"
+                  onMouseEnter={() => link.hasDropdown && setActiveDropdown(link.name)}
+                  onMouseLeave={() => setActiveDropdown(null)}
                 >
-                  {link.name}
-                </Link>
+                  <Link 
+                    to={link.href} 
+                    className="nav-link text-xs xl:text-sm flex items-center gap-1 py-2"
+                  >
+                    {link.name}
+                    {link.hasDropdown && <ChevronDown className="w-3 h-3" />}
+                  </Link>
+                  
+                  {/* Mega Menu Dropdown */}
+                  {link.hasDropdown && activeDropdown === link.name && (
+                    <div 
+                      className="absolute top-full left-1/2 -translate-x-1/2 pt-2 z-50"
+                      style={{ minWidth: "800px" }}
+                    >
+                      <div className="bg-background border border-border shadow-xl rounded-sm p-6 animate-fade-in">
+                        <div className="grid grid-cols-4 gap-8">
+                          {Object.entries(link.menu!).map(([category, items]) => (
+                            <div key={category}>
+                              <h3 className="text-xs font-semibold uppercase tracking-wider text-primary mb-3">
+                                {category}
+                              </h3>
+                              <ul className="space-y-2">
+                                {items.map((item) => (
+                                  <li key={item}>
+                                    <Link
+                                      to={generateCategoryLink(category, item)}
+                                      className="text-sm text-muted-foreground hover:text-foreground transition-colors block py-0.5"
+                                      onClick={() => setActiveDropdown(null)}
+                                    >
+                                      {item}
+                                    </Link>
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
               ))}
             </nav>
 
@@ -164,18 +275,66 @@ const Header = () => {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <nav className="lg:hidden border-t border-border animate-fade-in" aria-label="Mobile navigation">
+          <nav className="lg:hidden border-t border-border animate-fade-in max-h-[70vh] overflow-y-auto" aria-label="Mobile navigation">
             <div className="container mx-auto px-4 py-4">
               <div className="flex flex-col gap-1">
                 {mainNavLinks.map((link) => (
-                  <Link
-                    key={link.name}
-                    to={link.href}
-                    className="text-sm tracking-wide uppercase py-3 px-2 hover:bg-muted rounded-sm transition-colors"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    {link.name}
-                  </Link>
+                  <div key={link.name}>
+                    {link.hasDropdown ? (
+                      <>
+                        <button
+                          className="w-full text-left text-sm tracking-wide uppercase py-3 px-2 hover:bg-muted rounded-sm transition-colors flex items-center justify-between"
+                          onClick={() => setExpandedMobileSection(
+                            expandedMobileSection === link.name ? null : link.name
+                          )}
+                        >
+                          {link.name}
+                          <ChevronDown className={`w-4 h-4 transition-transform ${expandedMobileSection === link.name ? 'rotate-180' : ''}`} />
+                        </button>
+                        
+                        {expandedMobileSection === link.name && (
+                          <div className="pl-4 animate-fade-in">
+                            {Object.entries(link.menu!).map(([category, items]) => (
+                              <div key={category} className="mb-2">
+                                <button
+                                  className="w-full text-left text-xs font-semibold uppercase tracking-wider text-primary py-2 px-2 flex items-center justify-between"
+                                  onClick={() => setExpandedMobileCategory(
+                                    expandedMobileCategory === category ? null : category
+                                  )}
+                                >
+                                  {category}
+                                  <ChevronRight className={`w-3 h-3 transition-transform ${expandedMobileCategory === category ? 'rotate-90' : ''}`} />
+                                </button>
+                                
+                                {expandedMobileCategory === category && (
+                                  <div className="pl-4 animate-fade-in">
+                                    {items.map((item) => (
+                                      <Link
+                                        key={item}
+                                        to={generateCategoryLink(category, item)}
+                                        className="block text-sm text-muted-foreground py-2 px-2 hover:bg-muted rounded-sm transition-colors"
+                                        onClick={() => setIsMenuOpen(false)}
+                                      >
+                                        {item}
+                                      </Link>
+                                    ))}
+                                  </div>
+                                )}
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                      </>
+                    ) : (
+                      <Link
+                        to={link.href}
+                        className="text-sm tracking-wide uppercase py-3 px-2 hover:bg-muted rounded-sm transition-colors block"
+                        onClick={() => setIsMenuOpen(false)}
+                      >
+                        {link.name}
+                      </Link>
+                    )}
+                  </div>
                 ))}
                 
                 <div className="my-2 border-t border-border" />
