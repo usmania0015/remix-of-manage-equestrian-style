@@ -193,7 +193,7 @@ const SignatureCollection = () => {
               >
                 {/* Image */}
                 <div className="w-full lg:w-1/2 relative group">
-                  <div className="aspect-[4/5] overflow-hidden bg-cream">
+                  <div className="aspect-[4/5] overflow-hidden bg-gradient-to-br from-neutral-100 to-neutral-200">
                     {item.product && (
                       <img 
                         src={item.product.image} 
