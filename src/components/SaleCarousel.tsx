@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Heart } from "lucide-react";
 import { products } from "@/data/products";
+import { useLocale } from "@/contexts/LocaleContext";
 import {
   Carousel,
   CarouselContent,
@@ -10,6 +11,7 @@ import {
 } from "@/components/ui/carousel";
 
 const SaleCarousel = () => {
+  const { formatPrice } = useLocale();
   // Get featured/sale items - using bestsellers as sale items for demo
   const saleProducts = products.filter(p => p.isBestSeller || p.isNew).slice(0, 12);
 
@@ -74,7 +76,7 @@ const SaleCarousel = () => {
                   <h3 className="text-sm font-medium mb-1 group-hover:underline underline-offset-2">
                     {product.name}
                   </h3>
-                  <p className="text-sm">${product.price}</p>
+                  <p className="text-sm">{formatPrice(product.price)}</p>
                 </Link>
               </CarouselItem>
             ))}

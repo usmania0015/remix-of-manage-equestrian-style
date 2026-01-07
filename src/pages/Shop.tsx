@@ -11,11 +11,13 @@ import {
   horseCategories,
   Product 
 } from "@/data/products";
+import { useLocale } from "@/contexts/LocaleContext";
 
 const Shop = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const collectionParam = searchParams.get("collection") as "rider" | "horse" | null;
   const categoryParam = searchParams.get("category");
+  const { formatPrice } = useLocale();
   
   const [selectedCollection, setSelectedCollection] = useState<"rider" | "horse" | "all">(
     collectionParam || "all"
@@ -415,7 +417,7 @@ const Shop = () => {
                     {product.category}
                   </p>
                   <h3 className="font-heading text-lg mb-1 group-hover:underline">{product.name}</h3>
-                  <p className="text-foreground font-medium">${product.price}</p>
+                  <p className="text-foreground font-medium">{formatPrice(product.price)}</p>
                   {product.inStock && (
                     <p className="text-xs text-accent mt-1">In Stock</p>
                   )}

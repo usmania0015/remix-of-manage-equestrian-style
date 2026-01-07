@@ -7,12 +7,14 @@ import SEOHead, { generateProductSchema, generateBreadcrumbSchema } from "@/comp
 import { Button } from "@/components/ui/button";
 import { getProductById, products } from "@/data/products";
 import { useCart } from "@/contexts/CartContext";
+import { useLocale } from "@/contexts/LocaleContext";
 import { toast } from "sonner";
 
 const Product = () => {
   const { id } = useParams<{ id: string }>();
   const product = getProductById(id || "");
   const { addItem } = useCart();
+  const { formatPrice } = useLocale();
   
   const [selectedSize, setSelectedSize] = useState<string>("");
   const [selectedColor, setSelectedColor] = useState<string>("");
@@ -113,7 +115,7 @@ const Product = () => {
                 {product.category}
               </p>
               <h1 className="font-heading text-3xl lg:text-4xl mb-4">{product.name}</h1>
-              <p className="text-2xl font-medium mb-6">${product.price}</p>
+              <p className="text-2xl font-medium mb-6">{formatPrice(product.price)}</p>
               
               <p className="text-muted-foreground mb-8 leading-relaxed">
                 {product.description}
@@ -181,7 +183,7 @@ const Product = () => {
 
               {/* Add to Cart */}
               <Button onClick={handleAddToCart} className="w-full btn-primary mb-4">
-                Add to Bag — ${product.price * quantity}
+                Add to Bag — {formatPrice(product.price * quantity)}
               </Button>
 
               {/* Product Info */}
@@ -220,7 +222,7 @@ const Product = () => {
                       {relatedProduct.category}
                     </p>
                     <h3 className="font-heading text-lg mb-1">{relatedProduct.name}</h3>
-                    <p className="font-medium">${relatedProduct.price}</p>
+                    <p className="font-medium">{formatPrice(relatedProduct.price)}</p>
                   </Link>
                 ))}
               </div>

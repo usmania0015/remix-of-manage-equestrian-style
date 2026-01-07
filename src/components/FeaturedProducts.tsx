@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
 import { ArrowRight, Heart } from "lucide-react";
 import { getFeaturedProducts } from "@/data/products";
+import { useLocale } from "@/contexts/LocaleContext";
 
 const FeaturedProducts = () => {
   const featuredProducts = getFeaturedProducts();
+  const { formatPrice } = useLocale();
   
   return (
     <section id="new" className="py-24 lg:py-32 bg-secondary/30">
@@ -60,7 +62,7 @@ const FeaturedProducts = () => {
                 {product.category}
               </p>
               <h3 className="font-heading text-lg mb-1 group-hover:underline">{product.name}</h3>
-              <p className="text-foreground font-medium">${product.price}</p>
+              <p className="text-foreground font-medium">{formatPrice(product.price)}</p>
               <p className="text-xs text-accent mt-1">In Stock • Ships Tomorrow</p>
             </Link>
           ))}
