@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import { products } from "@/data/products";
 import manegeLogo from "@/assets/manege-logo.png";
+import { useLocale } from "@/contexts/LocaleContext";
 
 const SignatureCollection = () => {
   // Filter signature Manège products
@@ -82,20 +83,22 @@ const SignatureCollection = () => {
     }
   ];
 
+  const { formatPrice } = useLocale();
+
   return (
     <div className="min-h-screen bg-background">
       <SEOHead
-        title="Signature Collection | Luxury Manège Base Layers | Italian Craftsmanship"
-        description="Discover the exclusive Manège Signature Collection. Premium Italian-crafted base layers featuring our iconic embossed collar branding. Available in 6 sophisticated colors."
-        keywords="Manège signature collection, luxury base layers, Italian equestrian fashion, embossed collar, premium riding tops, signature riding wear"
+        title="The Ilyana Collection | Luxury Manège Base Layers | Italian Craftsmanship"
+        description="Discover the exclusive Manège Ilyana Collection. Premium Italian-crafted base layers featuring our iconic embossed collar branding. Available in 6 sophisticated colors."
+        keywords="Manège Ilyana collection, luxury base layers, Italian equestrian fashion, embossed collar, premium riding tops, signature riding wear"
         canonicalUrl="https://manege-equestrian.com/signature"
         structuredData={signatureSchema}
       />
       <Header />
       
-      {/* Hero Section */}
-      <section className="relative min-h-[80vh] flex items-center justify-center bg-charcoal text-primary-foreground overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-charcoal via-charcoal/95 to-charcoal" />
+      {/* Hero Section - Fixed contrast */}
+      <section className="relative min-h-[80vh] flex items-center justify-center bg-primary text-primary-foreground overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-primary via-primary/95 to-primary" />
         
         {/* Decorative elements */}
         <div className="absolute top-20 left-10 w-64 h-64 border border-primary-foreground/10 rounded-full animate-pulse" />
@@ -103,20 +106,22 @@ const SignatureCollection = () => {
         
         <div className="relative z-10 container mx-auto px-6 lg:px-12 text-center pt-20">
           <div className="flex justify-center mb-8">
-            <img 
-              src={manegeLogo} 
-              alt="Manège Equestrian" 
-              className="h-32 lg:h-40 w-auto opacity-90"
-            />
+            <div className="bg-background rounded-lg p-4">
+              <img 
+                src={manegeLogo} 
+                alt="Manège Equestrian" 
+                className="h-24 lg:h-32 w-auto"
+              />
+            </div>
           </div>
           
           <div className="flex items-center justify-center gap-3 mb-6">
             <Sparkles className="w-5 h-5 text-gold" />
-            <span className="text-sm tracking-[0.3em] uppercase text-gold">The Signature Collection</span>
+            <span className="text-sm tracking-[0.3em] uppercase text-gold">The Ilyana Collection</span>
             <Sparkles className="w-5 h-5 text-gold" />
           </div>
           
-          <h1 className="font-heading text-4xl md:text-6xl lg:text-7xl mb-6">
+          <h1 className="font-heading text-4xl md:text-6xl lg:text-7xl mb-6 text-primary-foreground">
             Where Luxury<br />Meets Performance
           </h1>
           
@@ -128,7 +133,7 @@ const SignatureCollection = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a 
               href="#lookbook" 
-              className="btn-primary bg-primary-foreground text-charcoal hover:bg-primary-foreground/90"
+              className="btn-primary bg-primary-foreground text-primary hover:bg-primary-foreground/90"
             >
               Explore the Lookbook
             </a>
@@ -220,7 +225,7 @@ const SignatureCollection = () => {
                   {item.product && (
                     <div className="pt-6 space-y-4">
                       <div className="flex items-center gap-4">
-                        <span className="text-2xl font-heading">€{item.product.price}</span>
+                        <span className="text-2xl font-heading">{formatPrice(item.product.price)}</span>
                         <div className="flex items-center gap-1">
                           {[...Array(5)].map((_, i) => (
                             <Star key={i} className="w-4 h-4 fill-gold text-gold" />
@@ -245,10 +250,10 @@ const SignatureCollection = () => {
       </section>
 
       {/* Complete the Look CTA */}
-      <section className="py-20 lg:py-32 bg-charcoal text-primary-foreground">
+      <section className="py-20 lg:py-32 bg-primary text-primary-foreground">
         <div className="container mx-auto px-6 lg:px-12 text-center">
           <span className="text-sm tracking-[0.3em] uppercase text-gold mb-4 block">Complete Your Collection</span>
-          <h2 className="font-heading text-3xl md:text-5xl mb-6">
+          <h2 className="font-heading text-3xl md:text-5xl mb-6 text-primary-foreground">
             One Base Layer. Every Color.
           </h2>
           <p className="text-primary-foreground/70 max-w-2xl mx-auto mb-10">
@@ -275,12 +280,12 @@ const SignatureCollection = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link 
               to="/shop" 
-              className="btn-primary bg-primary-foreground text-charcoal hover:bg-primary-foreground/90"
+              className="btn-primary bg-primary-foreground text-primary hover:bg-primary-foreground/90"
             >
               Shop All Signature Pieces
             </Link>
             <Link to="/contact" className="btn-secondary border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10">
-              Book a Styling Consultation
+              Contact Us
             </Link>
           </div>
         </div>

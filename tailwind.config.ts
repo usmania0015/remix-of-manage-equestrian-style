@@ -52,6 +52,7 @@ export default {
         taupe: "hsl(var(--taupe))",
         sage: "hsl(var(--sage))",
         charcoal: "hsl(var(--charcoal))",
+        gold: "hsl(var(--gold))",
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",

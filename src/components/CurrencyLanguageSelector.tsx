@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Globe, ChevronDown } from "lucide-react";
 import {
   DropdownMenu,
@@ -7,29 +6,14 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-
-const currencies = [
-  { code: "USD", symbol: "$", name: "US Dollar" },
-  { code: "EUR", symbol: "€", name: "Euro" },
-  { code: "GBP", symbol: "£", name: "British Pound" },
-  { code: "SEK", symbol: "kr", name: "Swedish Krona" },
-  { code: "AUD", symbol: "A$", name: "Australian Dollar" },
-];
-
-const languages = [
-  { code: "en", name: "English" },
-  { code: "sv", name: "Svenska" },
-  { code: "de", name: "Deutsch" },
-  { code: "fr", name: "Français" },
-];
+import { useLocale, currencies, languages } from "@/contexts/LocaleContext";
 
 interface CurrencyLanguageSelectorProps {
   className?: string;
 }
 
 const CurrencyLanguageSelector = ({ className = "" }: CurrencyLanguageSelectorProps) => {
-  const [currency, setCurrency] = useState(currencies[0]);
-  const [language, setLanguage] = useState(languages[0]);
+  const { currency, setCurrency, language, setLanguage } = useLocale();
 
   return (
     <DropdownMenu>

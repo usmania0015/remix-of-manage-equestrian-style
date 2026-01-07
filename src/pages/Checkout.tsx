@@ -8,11 +8,13 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useCart } from "@/contexts/CartContext";
 import { useAuth } from "@/contexts/AuthContext";
+import { useLocale } from "@/contexts/LocaleContext";
 import { toast } from "sonner";
 
 const Checkout = () => {
   const { items, totalPrice, clearCart } = useCart();
   const { user } = useAuth();
+  const { formatPrice, currency } = useLocale();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
@@ -30,9 +32,9 @@ const Checkout = () => {
     cvv: "",
   });
 
-  const shipping = totalPrice >= 150 ? 0 : 15;
-  const tax = Math.round(totalPrice * 0.08 * 100) / 100;
-  const orderTotal = totalPrice + shipping + tax;
+  const shippingUSD = totalPrice >= 150 ? 0 : 15;
+  const taxUSD = Math.round(totalPrice * 0.08 * 100) / 100;
+  const orderTotalUSD = totalPrice + shippingUSD + taxUSD;
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -244,7 +246,7 @@ const Checkout = () => {
               </div>
 
               <Button type="submit" className="w-full btn-primary" disabled={loading}>
-                {loading ? "Processing..." : `Place Order — $${orderTotal.toFixed(2)}`}
+                {loading ? "Processing..." : `Place Order — ${formatPrice(orderTotalUSD)}`}
               </Button>
             </form>
 
@@ -275,7 +277,7 @@ const Checkout = () => {
                           {item.size} / {item.color}
                         </p>
                       </div>
-                      <p className="font-medium">${item.product.price * item.quantity}</p>
+                      <p className="font-medium">{formatPrice(item.product.price * item.quantity)}</p>
                     </div>
                   ))}
                 </div>
@@ -283,22 +285,22 @@ const Checkout = () => {
                 <div className="border-t border-border pt-4 space-y-2 text-sm">
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">Subtotal</span>
-                    <span>${totalPrice}</span>
+                    <span>{formatPrice(totalPrice)}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">Shipping</span>
-                    <span>{shipping === 0 ? "Free" : `$${shipping}`}</span>
+                    <span>{shippingUSD === 0 ? "Free" : formatPrice(shippingUSD)}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">Tax</span>
-                    <span>${tax}</span>
+                    <span>{formatPrice(taxUSD)}</span>
                   </div>
                 </div>
 
                 <div className="border-t border-border pt-4 mt-4">
                   <div className="flex justify-between text-lg font-medium">
                     <span>Total</span>
-                    <span>${orderTotal.toFixed(2)}</span>
+                    <span>{formatPrice(orderTotalUSD)}</span>
                   </div>
                 </div>
               </div>

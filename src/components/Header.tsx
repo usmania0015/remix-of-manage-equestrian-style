@@ -167,7 +167,7 @@ const Header = () => {
                                   <li key={item}>
                                     <Link
                                       to={generateCategoryLink(category, item)}
-                                      className="text-sm text-muted-foreground hover:text-foreground transition-colors block py-0.5"
+                                      className="text-sm text-muted-foreground hover:opacity-70 transition-opacity block py-0.5"
                                       onClick={() => setActiveDropdown(null)}
                                     >
                                       {item}

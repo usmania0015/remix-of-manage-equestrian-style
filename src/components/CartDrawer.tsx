@@ -1,11 +1,13 @@
 import { X, Minus, Plus, ShoppingBag } from "lucide-react";
 import { useCart } from "@/contexts/CartContext";
+import { useLocale } from "@/contexts/LocaleContext";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { Link } from "react-router-dom";
 
 const CartDrawer = () => {
   const { items, removeItem, updateQuantity, totalItems, totalPrice, isCartOpen, setIsCartOpen } = useCart();
+  const { formatPrice } = useLocale();
 
   return (
     <Sheet open={isCartOpen} onOpenChange={setIsCartOpen}>
@@ -65,7 +67,7 @@ const CartDrawer = () => {
                           <Plus className="w-4 h-4" />
                         </button>
                       </div>
-                      <p className="font-medium">${item.product.price * item.quantity}</p>
+                      <p className="font-medium">{formatPrice(item.product.price * item.quantity)}</p>
                     </div>
                   </div>
                   <button
@@ -81,7 +83,7 @@ const CartDrawer = () => {
             <div className="border-t border-border pt-4 space-y-4">
               <div className="flex justify-between text-lg font-medium">
                 <span>Subtotal</span>
-                <span>${totalPrice}</span>
+                <span>{formatPrice(totalPrice)}</span>
               </div>
               <p className="text-sm text-muted-foreground">
                 Shipping and taxes calculated at checkout.

@@ -42,6 +42,7 @@
     --taupe: 30 10% 60%;
     --sage: 145 15% 45%;
     --charcoal: 30 10% 15%;
+    --gold: 38 60% 50%;
     
     /* Gradients */
     --gradient-hero: linear-gradient(180deg, hsl(40 30% 95% / 0.3) 0%, hsl(40 20% 98%) 100%);
@@ -108,11 +109,11 @@
 
 @layer components {
   .nav-link {
-    @apply text-sm tracking-wide uppercase text-foreground/80 hover:text-foreground transition-colors duration-300 relative;
+    @apply text-sm tracking-wide uppercase text-foreground transition-all duration-300 relative;
   }
   
   .nav-link::after {
-    @apply content-[''] absolute -bottom-1 left-0 w-0 h-px bg-foreground transition-all duration-300;
+    @apply content-[''] absolute -bottom-1 left-0 w-0 h-px bg-foreground/40 transition-all duration-300;
   }
   
   .nav-link:hover::after {
