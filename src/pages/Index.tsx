@@ -45,7 +45,9 @@ const Index = () => {
         <BrandStory />
         <SaleCarousel />
         <FeaturedProducts />
+        <PressStrip />
         <ReviewsCarousel />
+        <RecentlyViewed />
         <Newsletter />
         <FinalCTA />
       </main>
