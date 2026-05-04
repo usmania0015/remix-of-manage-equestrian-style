@@ -50,10 +50,11 @@ const FeaturedProducts = () => {
                   className="absolute top-4 right-4 w-10 h-10 bg-background/90 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
                   onClick={(e) => {
                     e.preventDefault();
-                    // Wishlist functionality
+                    toggle(product.id);
                   }}
+                  aria-label="Toggle wishlist"
                 >
-                  <Heart className="w-5 h-5" />
+                  <Heart className={`w-5 h-5 ${has(product.id) ? "fill-foreground" : ""}`} />
                 </button>
                 {/* Quick shop */}
                 <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-charcoal/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
