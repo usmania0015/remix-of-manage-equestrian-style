@@ -1,10 +1,10 @@
-import { createContext, useContext, useState, ReactNode } from "react";
+import { createContext, useContext, useState, useEffect, ReactNode } from "react";
 
 interface Currency {
   code: string;
   symbol: string;
   name: string;
-  rate: number; // Conversion rate from USD
+  rate: number;
 }
 
 interface Language {
@@ -33,34 +33,67 @@ interface LocaleContextType {
   language: Language;
   setLanguage: (language: Language) => void;
   formatPrice: (priceUSD: number) => string;
+  hasSelected: boolean;
+  confirmSelection: () => void;
 }
 
 const LocaleContext = createContext<LocaleContextType | undefined>(undefined);
 
+const STORAGE_KEY = "manege-locale";
+
 export const LocaleProvider = ({ children }: { children: ReactNode }) => {
-  const [currency, setCurrency] = useState<Currency>(currencies[0]);
-  const [language, setLanguage] = useState<Language>(languages[0]);
+  const [currency, setCurrencyState] = useState<Currency>(currencies[0]);
+  const [language, setLanguageState] = useState<Language>(languages[0]);
+  const [hasSelected, setHasSelected] = useState(true);
+
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved) {
+        const { currencyCode, languageCode } = JSON.parse(saved);
+        const c = currencies.find((x) => x.code === currencyCode);
+        const l = languages.find((x) => x.code === languageCode);
+        if (c) setCurrencyState(c);
+        if (l) setLanguageState(l);
+      } else {
+        setHasSelected(false);
+      }
+    } catch {
+      setHasSelected(false);
+    }
+  }, []);
+
+  const persist = (c: Currency, l: Language) => {
+    localStorage.setItem(
+      STORAGE_KEY,
+      JSON.stringify({ currencyCode: c.code, languageCode: l.code })
+    );
+  };
+
+  const setCurrency = (c: Currency) => {
+    setCurrencyState(c);
+    persist(c, language);
+  };
+
+  const setLanguage = (l: Language) => {
+    setLanguageState(l);
+    persist(currency, l);
+  };
+
+  const confirmSelection = () => {
+    persist(currency, language);
+    setHasSelected(true);
+  };
 
   const formatPrice = (priceUSD: number): string => {
-    const convertedPrice = priceUSD * currency.rate;
-    
-    // Format based on currency
-    if (currency.code === "SEK") {
-      return `${Math.round(convertedPrice)} ${currency.symbol}`;
-    }
-    
-    return `${currency.symbol}${convertedPrice.toFixed(2)}`;
+    const v = priceUSD * currency.rate;
+    if (currency.code === "SEK") return `${Math.round(v)} ${currency.symbol}`;
+    return `${currency.symbol}${v.toFixed(2)}`;
   };
 
   return (
     <LocaleContext.Provider
-      value={{
-        currency,
-        setCurrency,
-        language,
-        setLanguage,
-        formatPrice,
-      }}
+      value={{ currency, setCurrency, language, setLanguage, formatPrice, hasSelected, confirmSelection }}
     >
       {children}
     </LocaleContext.Provider>
@@ -68,9 +101,7 @@ export const LocaleProvider = ({ children }: { children: ReactNode }) => {
 };
 
 export const useLocale = (): LocaleContextType => {
-  const context = useContext(LocaleContext);
-  if (!context) {
-    throw new Error("useLocale must be used within a LocaleProvider");
-  }
-  return context;
+  const ctx = useContext(LocaleContext);
+  if (!ctx) throw new Error("useLocale must be used within a LocaleProvider");
+  return ctx;
 };

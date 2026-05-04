@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Menu, X, Search, ShoppingBag, User, ChevronDown, ChevronRight } from "lucide-react";
+import { Menu, X, Search, ShoppingBag, User, ChevronDown, ChevronRight, Heart } from "lucide-react";
 import manegeLogo from "@/assets/manege-logo.png";
 import { useCart } from "@/contexts/CartContext";
 import { useAuth } from "@/contexts/AuthContext";
+import { useWishlist } from "@/contexts/WishlistContext";
 import AnnouncementBar from "./AnnouncementBar";
 import CurrencyLanguageSelector from "./CurrencyLanguageSelector";
 
@@ -78,17 +79,26 @@ const Header = () => {
   const [expandedMobileCategory, setExpandedMobileCategory] = useState<string | null>(null);
   const { totalItems, setIsCartOpen } = useCart();
   const { user, signOut } = useAuth();
+  const { count: wishlistCount, setIsOpen: setWishlistOpen } = useWishlist();
 
   const mainNavLinks = [
     { name: "New Arrivals", href: "/shop?filter=new" },
     { name: "Rider", href: "/shop?collection=rider", hasDropdown: true, menu: riderMenu },
     { name: "Horse", href: "/shop?collection=horse", hasDropdown: true, menu: horseMenu },
+    { name: "Discipline", href: "/discipline/show-jumping", hasDropdown: true, menu: {
+      Disciplines: ["Show Jumping", "Dressage", "Eventing"],
+      Editorial: ["The Ilyana Collection", "World of Manège", "Sustainability"],
+    } },
     { name: "Best Sellers", href: "/shop?filter=bestseller" },
     { name: "The Ilyana Collection", href: "/signature" },
   ];
 
   const secondaryNavLinks = [
     { name: "About", href: "/about" },
+    { name: "World of Manège", href: "/world" },
+    { name: "Sustainability", href: "/sustainability" },
+    { name: "Gift Cards", href: "/gift-cards" },
+    { name: "Size Guide", href: "/size-guide" },
     { name: "Contact", href: "/contact" },
     { name: "FAQ", href: "/faq" },
   ];
@@ -241,6 +251,20 @@ const Header = () => {
                 <User className="w-5 h-5" />
                 <span className="hidden lg:inline text-sm">{user ? "Sign Out" : "Account"}</span>
               </Link>
+
+              {/* Wishlist */}
+              <button
+                className="p-2 hover:bg-muted rounded-sm transition-colors relative hidden sm:flex items-center"
+                aria-label={`Wishlist with ${wishlistCount} items`}
+                onClick={() => setWishlistOpen(true)}
+              >
+                <Heart className="w-5 h-5" />
+                {wishlistCount > 0 && (
+                  <span className="absolute -top-0.5 -right-0.5 w-5 h-5 bg-primary text-primary-foreground text-xs flex items-center justify-center rounded-full font-medium">
+                    {wishlistCount}
+                  </span>
+                )}
+              </button>
 
               {/* Cart */}
               <button 

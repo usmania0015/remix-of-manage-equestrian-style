@@ -1,13 +1,16 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import { ArrowLeft, Minus, Plus } from "lucide-react";
+import { ArrowLeft, Minus, Plus, Heart } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import RecentlyViewed from "@/components/RecentlyViewed";
 import SEOHead, { generateProductSchema, generateBreadcrumbSchema } from "@/components/SEOHead";
 import { Button } from "@/components/ui/button";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { getProductById, products } from "@/data/products";
 import { useCart } from "@/contexts/CartContext";
 import { useLocale } from "@/contexts/LocaleContext";
+import { useWishlist, trackRecentlyViewed } from "@/contexts/WishlistContext";
 import { toast } from "sonner";
 
 const Product = () => {
@@ -15,10 +18,15 @@ const Product = () => {
   const product = getProductById(id || "");
   const { addItem } = useCart();
   const { formatPrice } = useLocale();
-  
+  const { toggle: toggleWish, has: hasWish } = useWishlist();
+
   const [selectedSize, setSelectedSize] = useState<string>("");
   const [selectedColor, setSelectedColor] = useState<string>("");
   const [quantity, setQuantity] = useState(1);
+
+  useEffect(() => {
+    if (id) trackRecentlyViewed(id);
+  }, [id]);
 
   if (!product) {
     return (
@@ -115,8 +123,14 @@ const Product = () => {
                 {product.category}
               </p>
               <h1 className="font-heading text-3xl lg:text-4xl mb-4">{product.name}</h1>
-              <p className="text-2xl font-medium mb-6">{formatPrice(product.price)}</p>
-              
+              <p className="text-2xl font-medium mb-3">{formatPrice(product.price)}</p>
+
+              {product.inStock && (
+                <p className="text-xs tracking-widest uppercase text-accent mb-6">
+                  In Stock · Ships within 24 hours
+                </p>
+              )}
+
               <p className="text-muted-foreground mb-8 leading-relaxed">
                 {product.description}
               </p>
@@ -182,21 +196,46 @@ const Product = () => {
               </div>
 
               {/* Add to Cart */}
-              <Button onClick={handleAddToCart} className="w-full btn-primary mb-4">
-                Add to Bag — {formatPrice(product.price * quantity)}
-              </Button>
-
-              {/* Product Info */}
-              <div className="border-t border-border pt-8 mt-8 space-y-4 text-sm">
-                <div>
-                  <p className="font-medium mb-1">Free Shipping</p>
-                  <p className="text-muted-foreground">On orders over $150</p>
-                </div>
-                <div>
-                  <p className="font-medium mb-1">Easy Returns</p>
-                  <p className="text-muted-foreground">30-day return policy</p>
-                </div>
+              <div className="flex gap-3 mb-4">
+                <Button onClick={handleAddToCart} className="flex-1 btn-primary">
+                  Add to Bag — {formatPrice(product.price * quantity)}
+                </Button>
+                <button
+                  onClick={() => toggleWish(product.id)}
+                  className="w-12 border border-border hover:border-foreground flex items-center justify-center transition-colors"
+                  aria-label="Toggle wishlist"
+                >
+                  <Heart className={`w-5 h-5 ${hasWish(product.id) ? "fill-foreground" : ""}`} />
+                </button>
               </div>
+
+              <Link to="/size-guide" className="text-xs tracking-widest uppercase underline underline-offset-4 text-muted-foreground hover:text-foreground inline-block mb-6">
+                View Size Guide
+              </Link>
+
+              {/* Accordion */}
+              <Accordion type="single" collapsible className="border-t border-border mt-4">
+                <AccordionItem value="details">
+                  <AccordionTrigger className="text-xs tracking-widest uppercase">Product Details</AccordionTrigger>
+                  <AccordionContent className="text-muted-foreground text-sm leading-relaxed">
+                    {product.description} Crafted in our European atelier from premium technical fabrics. Designed for performance, refined for elegance.
+                  </AccordionContent>
+                </AccordionItem>
+                <AccordionItem value="shipping">
+                  <AccordionTrigger className="text-xs tracking-widest uppercase">Shipping & Returns</AccordionTrigger>
+                  <AccordionContent className="text-muted-foreground text-sm leading-relaxed space-y-2">
+                    <p>Complimentary express shipping on orders over $250.</p>
+                    <p>30-day complimentary returns on unworn items with original packaging.</p>
+                    <p>International orders ship via DHL Express within 1–3 business days.</p>
+                  </AccordionContent>
+                </AccordionItem>
+                <AccordionItem value="care">
+                  <AccordionTrigger className="text-xs tracking-widest uppercase">Care Instructions</AccordionTrigger>
+                  <AccordionContent className="text-muted-foreground text-sm leading-relaxed">
+                    Machine wash cold inside out on delicate cycle. Lay flat to dry. Do not bleach. For leather items, condition every six months with neutral cream.
+                  </AccordionContent>
+                </AccordionItem>
+              </Accordion>
             </div>
           </div>
 
@@ -229,6 +268,7 @@ const Product = () => {
             </div>
           )}
         </div>
+        <RecentlyViewed excludeId={product.id} />
       </main>
       <Footer />
     </div>
