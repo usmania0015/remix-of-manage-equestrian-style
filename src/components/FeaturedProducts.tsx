@@ -2,10 +2,12 @@ import { Link } from "react-router-dom";
 import { ArrowRight, Heart } from "lucide-react";
 import { getFeaturedProducts } from "@/data/products";
 import { useLocale } from "@/contexts/LocaleContext";
+import { useWishlist } from "@/contexts/WishlistContext";
 
 const FeaturedProducts = () => {
   const featuredProducts = getFeaturedProducts();
   const { formatPrice } = useLocale();
+  const { toggle, has } = useWishlist();
   
   return (
     <section id="new" className="py-24 lg:py-32 bg-secondary/30">
