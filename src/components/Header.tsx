@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Menu, X, Search, ShoppingBag, User, ChevronDown, ChevronRight } from "lucide-react";
+import { Menu, X, Search, ShoppingBag, User, ChevronDown, ChevronRight, Heart } from "lucide-react";
 import manegeLogo from "@/assets/manege-logo.png";
 import { useCart } from "@/contexts/CartContext";
 import { useAuth } from "@/contexts/AuthContext";
+import { useWishlist } from "@/contexts/WishlistContext";
 import AnnouncementBar from "./AnnouncementBar";
 import CurrencyLanguageSelector from "./CurrencyLanguageSelector";
 
