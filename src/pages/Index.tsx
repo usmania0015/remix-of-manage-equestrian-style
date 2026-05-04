@@ -5,6 +5,8 @@ import FeaturedProducts from "@/components/FeaturedProducts";
 import BrandStory from "@/components/BrandStory";
 import SaleCarousel from "@/components/SaleCarousel";
 import ReviewsCarousel from "@/components/ReviewsCarousel";
+import PressStrip from "@/components/PressStrip";
+import RecentlyViewed from "@/components/RecentlyViewed";
 import Newsletter from "@/components/Newsletter";
 import FinalCTA from "@/components/FinalCTA";
 import Footer from "@/components/Footer";
