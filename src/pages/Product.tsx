@@ -1,13 +1,16 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import { ArrowLeft, Minus, Plus } from "lucide-react";
+import { ArrowLeft, Minus, Plus, Heart } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import RecentlyViewed from "@/components/RecentlyViewed";
 import SEOHead, { generateProductSchema, generateBreadcrumbSchema } from "@/components/SEOHead";
 import { Button } from "@/components/ui/button";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { getProductById, products } from "@/data/products";
 import { useCart } from "@/contexts/CartContext";
 import { useLocale } from "@/contexts/LocaleContext";
+import { useWishlist, trackRecentlyViewed } from "@/contexts/WishlistContext";
 import { toast } from "sonner";
 
 const Product = () => {
@@ -15,10 +18,15 @@ const Product = () => {
   const product = getProductById(id || "");
   const { addItem } = useCart();
   const { formatPrice } = useLocale();
-  
+  const { toggle: toggleWish, has: hasWish } = useWishlist();
+
   const [selectedSize, setSelectedSize] = useState<string>("");
   const [selectedColor, setSelectedColor] = useState<string>("");
   const [quantity, setQuantity] = useState(1);
+
+  useEffect(() => {
+    if (id) trackRecentlyViewed(id);
+  }, [id]);
 
   if (!product) {
     return (
