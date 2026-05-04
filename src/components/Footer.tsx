@@ -23,21 +23,21 @@ const Footer = () => {
 
   const aboutLinks = [
     { name: "Our Story", href: "/about" },
-    { name: "Stories", href: "/about" },
-    { name: "Design Community", href: "/about" },
-    { name: "Gift Card", href: "/shop" },
-    { name: "House of Manège", href: "/about" },
-    { name: "Team Riders", href: "/about" },
-    { name: "Team Stables", href: "/about" },
-    { name: "The Story Behind the Product", href: "/about" },
+    { name: "World of Manège", href: "/world" },
+    { name: "Sustainability", href: "/sustainability" },
+    { name: "The Ilyana Collection", href: "/signature" },
+    { name: "Show Jumping", href: "/discipline/show-jumping" },
+    { name: "Dressage", href: "/discipline/dressage" },
+    { name: "Eventing", href: "/discipline/eventing" },
+    { name: "Gift Cards", href: "/gift-cards" },
   ];
 
   const supportLinks = [
     { name: "FAQ", href: "/faq" },
-    { name: "Shipping", href: "/faq" },
-    { name: "Returns & Complaints", href: "/faq" },
+    { name: "Size Guide", href: "/size-guide" },
+    { name: "Contact", href: "/contact" },
+    { name: "Shipping & Returns", href: "/faq" },
     { name: "Privacy Policy", href: "/faq" },
-    { name: "Your Privacy Choices", href: "/faq" },
   ];
 
   const paymentMethods = [
