@@ -79,17 +79,26 @@ const Header = () => {
   const [expandedMobileCategory, setExpandedMobileCategory] = useState<string | null>(null);
   const { totalItems, setIsCartOpen } = useCart();
   const { user, signOut } = useAuth();
+  const { count: wishlistCount, setIsOpen: setWishlistOpen } = useWishlist();
 
   const mainNavLinks = [
     { name: "New Arrivals", href: "/shop?filter=new" },
     { name: "Rider", href: "/shop?collection=rider", hasDropdown: true, menu: riderMenu },
     { name: "Horse", href: "/shop?collection=horse", hasDropdown: true, menu: horseMenu },
+    { name: "Discipline", href: "/discipline/show-jumping", hasDropdown: true, menu: {
+      Disciplines: ["Show Jumping", "Dressage", "Eventing"],
+      Editorial: ["The Ilyana Collection", "World of Manège", "Sustainability"],
+    } },
     { name: "Best Sellers", href: "/shop?filter=bestseller" },
     { name: "The Ilyana Collection", href: "/signature" },
   ];
 
   const secondaryNavLinks = [
     { name: "About", href: "/about" },
+    { name: "World of Manège", href: "/world" },
+    { name: "Sustainability", href: "/sustainability" },
+    { name: "Gift Cards", href: "/gift-cards" },
+    { name: "Size Guide", href: "/size-guide" },
     { name: "Contact", href: "/contact" },
     { name: "FAQ", href: "/faq" },
   ];
