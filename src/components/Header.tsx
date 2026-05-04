@@ -252,6 +252,20 @@ const Header = () => {
                 <span className="hidden lg:inline text-sm">{user ? "Sign Out" : "Account"}</span>
               </Link>
 
+              {/* Wishlist */}
+              <button
+                className="p-2 hover:bg-muted rounded-sm transition-colors relative hidden sm:flex items-center"
+                aria-label={`Wishlist with ${wishlistCount} items`}
+                onClick={() => setWishlistOpen(true)}
+              >
+                <Heart className="w-5 h-5" />
+                {wishlistCount > 0 && (
+                  <span className="absolute -top-0.5 -right-0.5 w-5 h-5 bg-primary text-primary-foreground text-xs flex items-center justify-center rounded-full font-medium">
+                    {wishlistCount}
+                  </span>
+                )}
+              </button>
+
               {/* Cart */}
               <button 
                 className="p-2 hover:bg-muted rounded-sm transition-colors relative flex items-center gap-1" 
