@@ -123,8 +123,14 @@ const Product = () => {
                 {product.category}
               </p>
               <h1 className="font-heading text-3xl lg:text-4xl mb-4">{product.name}</h1>
-              <p className="text-2xl font-medium mb-6">{formatPrice(product.price)}</p>
-              
+              <p className="text-2xl font-medium mb-3">{formatPrice(product.price)}</p>
+
+              {product.inStock && (
+                <p className="text-xs tracking-widest uppercase text-accent mb-6">
+                  In Stock · Ships within 24 hours
+                </p>
+              )}
+
               <p className="text-muted-foreground mb-8 leading-relaxed">
                 {product.description}
               </p>
