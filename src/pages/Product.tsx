@@ -268,6 +268,7 @@ const Product = () => {
             </div>
           )}
         </div>
+        <RecentlyViewed excludeId={product.id} />
       </main>
       <Footer />
     </div>
