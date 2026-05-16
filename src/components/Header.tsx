@@ -89,6 +89,7 @@ const Header = () => {
       Disciplines: ["Show Jumping", "Dressage", "Eventing"],
       Editorial: ["The Ilyana Collection", "World of Manège", "Sustainability"],
     } },
+    { name: "Atelier", href: "/atelier" },
     { name: "Best Sellers", href: "/shop?filter=bestseller" },
     { name: "The Ilyana Collection", href: "/signature" },
   ];
