@@ -26,6 +26,8 @@ import NotFound from "./pages/NotFound";
 import CartDrawer from "./components/CartDrawer";
 import WishlistDrawer from "./components/WishlistDrawer";
 import GeoWelcomeModal from "./components/GeoWelcomeModal";
+import StylingConcierge from "./components/StylingConcierge";
+import OutfitBuilder from "./pages/OutfitBuilder";
 
 const queryClient = new QueryClient();
 
@@ -41,6 +43,7 @@ const App = () => (
               <CartDrawer />
               <WishlistDrawer />
               <GeoWelcomeModal />
+              <StylingConcierge />
               <BrowserRouter>
                 <Routes>
                   <Route path="/" element={<Index />} />
@@ -58,6 +61,7 @@ const App = () => (
                   <Route path="/size-guide" element={<SizeGuide />} />
                   <Route path="/discipline/:slug" element={<Discipline />} />
                   <Route path="/gift-cards" element={<GiftCards />} />
+                  <Route path="/atelier" element={<OutfitBuilder />} />
                   <Route path="*" element={<NotFound />} />
                 </Routes>
               </BrowserRouter>
