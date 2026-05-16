@@ -79,14 +79,7 @@ const OutfitBuilder = () => {
   const addAllToCart = () => {
     outfit.forEach(({ product }) => {
       if (!product) return;
-      addItem({
-        id: product.id,
-        name: product.name,
-        price: product.price,
-        image: product.image,
-        size: product.sizes[0],
-        color: product.colors[0],
-      });
+      addItem(product, product.sizes[0], product.colors[0], 1);
     });
     toast.success(`${outfit.length} pieces added to your cart`);
   };
