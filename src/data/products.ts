@@ -8,6 +8,11 @@ import baselayerBurgundy from "@/assets/baselayer-burgundy.jpg";
 import baselayerBlack from "@/assets/baselayer-black.png";
 import baselayerBlush from "@/assets/baselayer-blush.jpg";
 import baselayerCamel from "@/assets/baselayer-camel.png";
+import breechesBlackFront from "@/assets/Black_Full_Seat_Front.png.asset.json";
+import breechesNavyFront from "@/assets/Navy_Full_Seat_Front.png.asset.json";
+import breechesWhiteFront from "@/assets/White_Full_Seat_Front.png.asset.json";
+import breechesBrownFront from "@/assets/Brown_Full_Seat_Front.png.asset.json";
+import breechesPinkFront from "@/assets/Pink_Full_Seat_Front.png.asset.json";
 
 export interface Product {
   id: string;
