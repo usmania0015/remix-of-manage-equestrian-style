@@ -2,17 +2,16 @@ import productJacket from "@/assets/product-jacket.jpg";
 import productBreeches from "@/assets/product-breeches.jpg";
 import productBaselayer from "@/assets/product-baselayer.jpg";
 import productSaddlepad from "@/assets/product-saddlepad.jpg";
-import baselayerCream from "@/assets/baselayer-cream.png";
-import baselayerNavy from "@/assets/baselayer-navy.png";
-import baselayerBurgundy from "@/assets/baselayer-burgundy.jpg";
-import baselayerBlack from "@/assets/baselayer-black.png";
-import baselayerBlush from "@/assets/baselayer-blush.jpg";
-import baselayerCamel from "@/assets/baselayer-camel.png";
 import breechesBlackFront from "@/assets/Black_Full_Seat_Front.png.asset.json";
 import breechesNavyFront from "@/assets/Navy_Full_Seat_Front.png.asset.json";
 import breechesWhiteFront from "@/assets/White_Full_Seat_Front.png.asset.json";
 import breechesBrownFront from "@/assets/Brown_Full_Seat_Front.png.asset.json";
 import breechesPinkFront from "@/assets/Pink_Full_Seat_Front.png.asset.json";
+import baselayerBlackFront from "@/assets/Black_Base_Layer_Front.png.asset.json";
+import baselayerNavyFront from "@/assets/Navy_Base_Layer_Front.png.asset.json";
+import baselayerCremeFront from "@/assets/Creme_Base_Layer_Front.png.asset.json";
+import baselayerBrownFront from "@/assets/Brown_Base_Layer_Front.png.asset.json";
+import baselayerPinkFront from "@/assets/Pink_Base_Layer_Front.png.asset.json";
 
 export interface Product {
   id: string;
@@ -175,12 +174,12 @@ export const products: Product[] = [
     id: "manege-base-layer-cream",
     name: "Manège Signature Base Layer - Cream",
     price: 125,
-    image: baselayerCream,
+    image: baselayerCremeFront.url,
     category: "Tops",
     collection: "rider",
-    description: "The iconic Manège signature base layer featuring our embossed logo collar. Crafted from premium Italian jersey with four-way stretch, moisture-wicking properties, and a silky smooth finish. The cream colorway offers timeless elegance for training and competition.",
+    description: "The iconic Manège signature base layer with embossed logo collar and gold half-zip. Premium Italian jersey with four-way stretch, perforated ventilation panels, and moisture-wicking finish. Cream offers timeless elegance for training and competition.",
     sizes: ["XS", "S", "M", "L", "XL"],
-    colors: ["Cream"],
+    colors: ["Cream", "Black", "Navy", "Espresso", "Blush"],
     inStock: true,
     isNew: true,
   },
@@ -188,64 +187,53 @@ export const products: Product[] = [
     id: "manege-base-layer-navy",
     name: "Manège Signature Base Layer - Navy",
     price: 125,
-    image: baselayerNavy,
+    image: baselayerNavyFront.url,
     category: "Tops",
     collection: "rider",
-    description: "The iconic Manège signature base layer featuring our embossed logo collar and half-zip design. Crafted from premium Italian jersey with four-way stretch and moisture-wicking properties. The deep navy colorway exudes sophistication and versatility.",
+    description: "Deep navy signature base layer with embossed Manège collar, gold half-zip pull, and perforated side panels for breathability. Premium Italian jersey with four-way stretch.",
     sizes: ["XS", "S", "M", "L", "XL"],
-    colors: ["Navy"],
+    colors: ["Navy", "Black", "Cream", "Espresso", "Blush"],
     inStock: true,
     isBestSeller: true,
-  },
-  {
-    id: "manege-base-layer-burgundy",
-    name: "Manège Signature Base Layer - Burgundy",
-    price: 125,
-    image: baselayerBurgundy,
-    category: "Tops",
-    collection: "rider",
-    description: "The iconic Manège signature base layer featuring our embossed logo collar. Crafted from premium Italian jersey with four-way stretch and moisture-wicking properties. The rich burgundy colorway makes a bold yet refined statement.",
-    sizes: ["XS", "S", "M", "L", "XL"],
-    colors: ["Burgundy"],
-    inStock: true,
   },
   {
     id: "manege-base-layer-black",
     name: "Manège Signature Base Layer - Black",
     price: 125,
-    image: baselayerBlack,
+    image: baselayerBlackFront.url,
     category: "Tops",
     collection: "rider",
-    description: "The iconic Manège signature base layer featuring our embossed logo collar. Crafted from premium Italian jersey with four-way stretch and moisture-wicking properties. Classic black for the discerning equestrian.",
+    description: "Classic black signature base layer with the embossed Manège collar and gold half-zip detail. Italian jersey with four-way stretch and moisture-wicking performance.",
     sizes: ["XS", "S", "M", "L", "XL"],
-    colors: ["Black"],
+    colors: ["Black", "Navy", "Cream", "Espresso", "Blush"],
     inStock: true,
     isBestSeller: true,
+  },
+  {
+    id: "manege-base-layer-espresso",
+    name: "Manège Signature Base Layer - Espresso",
+    price: 125,
+    image: baselayerBrownFront.url,
+    category: "Tops",
+    collection: "rider",
+    description: "Rich espresso brown signature base layer with embossed Manège collar and gold half-zip. Premium Italian jersey with four-way stretch and ventilated side panels.",
+    sizes: ["XS", "S", "M", "L", "XL"],
+    colors: ["Espresso", "Black", "Navy", "Cream", "Blush"],
+    inStock: true,
+    isNew: true,
   },
   {
     id: "manege-base-layer-blush",
     name: "Manège Signature Base Layer - Blush",
     price: 125,
-    image: baselayerBlush,
+    image: baselayerPinkFront.url,
     category: "Tops",
     collection: "rider",
-    description: "The iconic Manège signature base layer featuring our embossed logo collar. Crafted from premium Italian jersey with four-way stretch and moisture-wicking properties. The delicate blush pink adds a touch of feminine elegance.",
+    description: "Soft blush pink signature base layer with tonal embossed Manège collar and gold half-zip. Premium Italian jersey with four-way stretch for feminine sophistication in the saddle.",
     sizes: ["XS", "S", "M", "L", "XL"],
-    colors: ["Blush"],
+    colors: ["Blush", "Black", "Navy", "Cream", "Espresso"],
     inStock: true,
     isNew: true,
-  },
-  {
-    id: "manege-base-layer-camel",
-    name: "Manège Signature Base Layer - Camel",
-    price: 125,
-    image: baselayerCamel,
-    category: "Tops",
-    collection: "rider",
-    description: "The iconic Manège signature base layer featuring our embossed logo collar. Crafted from premium Italian jersey with four-way stretch and moisture-wicking properties. The warm camel tone brings earthy sophistication to your riding wardrobe.",
-    sizes: ["XS", "S", "M", "L", "XL"],
-    colors: ["Camel"],
-    inStock: true,
   },
   {
     id: "technical-polo-shirt",
