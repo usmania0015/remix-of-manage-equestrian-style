@@ -2,17 +2,16 @@ import productJacket from "@/assets/product-jacket.jpg";
 import productBreeches from "@/assets/product-breeches.jpg";
 import productBaselayer from "@/assets/product-baselayer.jpg";
 import productSaddlepad from "@/assets/product-saddlepad.jpg";
-import baselayerCream from "@/assets/baselayer-cream.png";
-import baselayerNavy from "@/assets/baselayer-navy.png";
-import baselayerBurgundy from "@/assets/baselayer-burgundy.jpg";
-import baselayerBlack from "@/assets/baselayer-black.png";
-import baselayerBlush from "@/assets/baselayer-blush.jpg";
-import baselayerCamel from "@/assets/baselayer-camel.png";
 import breechesBlackFront from "@/assets/Black_Full_Seat_Front.png.asset.json";
 import breechesNavyFront from "@/assets/Navy_Full_Seat_Front.png.asset.json";
 import breechesWhiteFront from "@/assets/White_Full_Seat_Front.png.asset.json";
 import breechesBrownFront from "@/assets/Brown_Full_Seat_Front.png.asset.json";
 import breechesPinkFront from "@/assets/Pink_Full_Seat_Front.png.asset.json";
+import baselayerBlackFront from "@/assets/Black_Base_Layer_Front.png.asset.json";
+import baselayerNavyFront from "@/assets/Navy_Base_Layer_Front.png.asset.json";
+import baselayerCremeFront from "@/assets/Creme_Base_Layer_Front.png.asset.json";
+import baselayerBrownFront from "@/assets/Brown_Base_Layer_Front.png.asset.json";
+import baselayerPinkFront from "@/assets/Pink_Base_Layer_Front.png.asset.json";
 
 export interface Product {
   id: string;
